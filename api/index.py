@@ -4,6 +4,22 @@ from itertools import islice
 
 app = Flask(__name__)
 
+@app.route('/analyze', methods=['OPTIONS'])
+def analyze_options():
+    return {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST"
+    }
+
+
+
+@app.after_request
+def after_request(response):
+#   response.headers.add('Access-Control-Allow-Origin', 'http://127.0.0.1:5500')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+  response.headers.add('Access-Control-Allow-Origin', 'https://tangible-super-manchego.glitch.me')
+
+  return response
 @app.route('/search')
 def search():
     # 从请求参数中获取关键词
