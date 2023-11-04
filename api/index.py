@@ -1,8 +1,10 @@
 from flask import Flask, request
 from duckduckgo_search import DDGS
 from itertools import islice
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app,  origins=["http://127.0.0.1:5500", "https://tangible-super-manchego.glitch.me"])
 
 @app.route('/analyze', methods=['OPTIONS'])
 def analyze_options():
